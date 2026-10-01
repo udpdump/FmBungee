@@ -1,3 +1,3 @@
 name: FmBungee
-version: '${project.version}'
+version: '${version}'
 main: by.udpdump.fmbungee.FmBungee
