@@ -1,0 +1,21 @@
+settings:
+  high-ping-threshold: 150
+
+messages:
+  ping: "&7Пинг: &a{ping} &7мс"
+  ping-other: "&7Пинг &f{player}&7: &a{ping} &7мс"
+  player-not-found: "&c> &fИгрок {player} не найден"
+  only-players: "&c> &fИспользуйте: /ping <игрок>"
+  no-permission: "&c> &fНедостаточно прав"
+  reload-success: "&a> &fКонфигурация перезагружена"
+  server-not-found: "&c> &fСервер {server} не найден"
+  avgping-no-players: "&c> &fНет игроков онлайн"
+  usage-fmbungee:
+    - "&6> &fКоманды FmBungee:"
+    - "&7/fmbungee reload &8— &fперезагрузка конфигурации"
+    - "&7/fmbungee avgping [сервер] &8— &fсредний пинг"
+  avgping:
+    - "&6> &fСтатистика &7({target})&f:"
+    - "&7Онлайн: &f{players}"
+    - "&7Средний пинг: &a{avg_ping} &7мс"
+    - "&7Высокий пинг &8(>={threshold}мс)&7: &c{high_ping_count}"
