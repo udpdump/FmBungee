@@ -8,8 +8,10 @@ messages:
   only-players: "&c> &fИспользуйте: /ping <игрок>"
   no-permission: "&c> &fНедостаточно прав"
   reload-success: "&a> &fКонфигурация перезагружена"
+  reload-fail: "&c> &fНе удалось перезагрузить конфигурацию, проверьте консоль"
   server-not-found: "&c> &fСервер {server} не найден"
   avgping-no-players: "&c> &fНет игроков онлайн"
+  target-all-network: "Вся сеть"
   usage-fmbungee:
     - "&6> &fКоманды FmBungee:"
     - "&7/fmbungee reload &8— &fперезагрузка конфигурации"
