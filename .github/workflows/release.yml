@@ -27,7 +27,9 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          ./gradlew clean build -Pversion="$VERSION"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -4,7 +4,12 @@ plugins {
 }
 
 group = "su.funmoon"
-version = "1.0-SNAPSHOT"
+val releaseVersion = project.findProperty("version") as? String
+version = if (!releaseVersion.isNullOrBlank() && releaseVersion != "unspecified" && releaseVersion != "1.0-SNAPSHOT") {
+    releaseVersion
+} else {
+    "1.0-SNAPSHOT"
+}
 
 repositories {
     mavenCentral()
