@@ -68,18 +68,9 @@ class FmBungeeCommand(private val plugin: FmBungee) : Command("fmbungee", "fmbun
         }
 
         val threshold = plugin.configManager.getInt("settings.high-ping-threshold", 150)
-        var totalPing = 0L
-        var highPingCount = 0
 
-        for (player in players) {
-            val ping = player.ping
-            totalPing += ping
-            if (ping >= threshold) {
-                highPingCount++
-            }
-        }
-
-        val avgPing = (totalPing.toDouble() / players.size).roundToInt()
+        val avgPing = players.map { it.ping }.average().roundToInt()
+        val highPingCount = players.count { it.ping >= threshold }
 
         val placeholders = mapOf(
             "{target}" to targetName,
