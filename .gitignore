@@ -3,8 +3,6 @@
 /build/
 /target/
 .idea/
-gradle/
-gradlew
 gradlew.bat
 *.iml
 *~
