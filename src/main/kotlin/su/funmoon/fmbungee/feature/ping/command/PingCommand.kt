@@ -5,22 +5,23 @@ import net.md_5.bungee.api.connection.ProxiedPlayer
 import net.md_5.bungee.api.plugin.Command
 import net.md_5.bungee.api.plugin.TabExecutor
 import su.funmoon.fmbungee.FmBungee
+import su.funmoon.fmbungee.utils.sendConfigMessage
 
 class PingCommand(private val plugin: FmBungee) : Command("ping", null, "p"), TabExecutor {
 
     override fun execute(sender: CommandSender, args: Array<out String>) {
         if (args.isEmpty()) {
             if (sender !is ProxiedPlayer) {
-                plugin.configManager.sendMessage(sender, "only-players")
+                sender.sendConfigMessage(plugin, "only-players")
                 return
             }
 
-            plugin.configManager.sendMessage(sender, "ping", "{ping}" to sender.ping)
+            sender.sendConfigMessage(plugin, "ping", "{ping}" to sender.ping)
             return
         }
 
         if (!sender.hasPermission("fmbungee.ping.other")) {
-            plugin.configManager.sendMessage(sender, "no-permission")
+            sender.sendConfigMessage(plugin, "no-permission")
             return
         }
 
@@ -28,12 +29,12 @@ class PingCommand(private val plugin: FmBungee) : Command("ping", null, "p"), Ta
         val target = plugin.proxy.getPlayer(targetName)
 
         if (target == null) {
-            plugin.configManager.sendMessage(sender, "player-not-found", "{player}" to targetName)
+            sender.sendConfigMessage(plugin, "player-not-found", "{player}" to targetName)
             return
         }
 
-        plugin.configManager.sendMessage(
-            sender,
+        sender.sendConfigMessage(
+            plugin,
             "ping-other",
             "{player}" to target.name,
             "{ping}" to target.ping

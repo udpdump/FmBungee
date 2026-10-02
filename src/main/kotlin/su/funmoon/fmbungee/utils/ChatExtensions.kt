@@ -2,6 +2,7 @@ package su.funmoon.fmbungee.utils
 
 import net.md_5.bungee.api.CommandSender
 import net.md_5.bungee.api.chat.BaseComponent
+import su.funmoon.fmbungee.FmBungee
 import su.funmoon.fmbungee.config.ConfigManager
 
 fun String.colorize(): String = TextUtils.colorize(this)
@@ -24,4 +25,12 @@ fun CommandSender.sendConfigMessage(
     } else {
         configManager.sendMessage(this, path, placeholders.toMap())
     }
+}
+
+fun CommandSender.sendConfigMessage(
+    plugin: FmBungee,
+    path: String,
+    vararg placeholders: Pair<String, Any>
+) {
+    sendConfigMessage(plugin.configManager, path, *placeholders)
 }

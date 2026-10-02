@@ -5,28 +5,29 @@ import net.md_5.bungee.api.connection.ProxiedPlayer
 import net.md_5.bungee.api.plugin.Command
 import net.md_5.bungee.api.plugin.TabExecutor
 import su.funmoon.fmbungee.FmBungee
+import su.funmoon.fmbungee.utils.sendConfigMessage
 import kotlin.math.roundToInt
 
 class FmBungeeCommand(private val plugin: FmBungee) : Command("fmbungee", null), TabExecutor {
 
     override fun execute(sender: CommandSender, args: Array<out String>) {
         if (!sender.hasPermission("fmbungee.admin")) {
-            plugin.configManager.sendMessage(sender, "no-permission")
+            sender.sendConfigMessage(plugin, "no-permission")
             return
         }
 
         when (args.firstOrNull()?.lowercase()) {
             "reload" -> handleReload(sender)
             "avgping" -> handleAvgPing(sender, args)
-            else -> plugin.configManager.sendMessage(sender, "usage-fmbungee")
+            else -> sender.sendConfigMessage(plugin, "usage-fmbungee")
         }
     }
 
     private fun handleReload(sender: CommandSender) {
         if (plugin.configManager.reloadConfig()) {
-            plugin.configManager.sendMessage(sender, "reload-success")
+            sender.sendConfigMessage(plugin, "reload-success")
         } else {
-            plugin.configManager.sendMessage(sender, "reload-fail")
+            sender.sendConfigMessage(plugin, "reload-fail")
         }
     }
 
@@ -39,7 +40,7 @@ class FmBungeeCommand(private val plugin: FmBungee) : Command("fmbungee", null),
             val serverInfo = plugin.proxy.getServerInfo(serverName)
 
             if (serverInfo == null) {
-                plugin.configManager.sendMessage(sender, "server-not-found", "{server}" to serverName)
+                sender.sendConfigMessage(plugin, "server-not-found", "{server}" to serverName)
                 return
             }
 
@@ -51,7 +52,7 @@ class FmBungeeCommand(private val plugin: FmBungee) : Command("fmbungee", null),
         }
 
         if (players.isEmpty()) {
-            plugin.configManager.sendMessage(sender, "avgping-no-players")
+            sender.sendConfigMessage(plugin, "avgping-no-players")
             return
         }
 
@@ -59,8 +60,8 @@ class FmBungeeCommand(private val plugin: FmBungee) : Command("fmbungee", null),
         val avgPing = (players.sumOf { it.ping.toLong() }.toDouble() / players.size).roundToInt()
         val highPingCount = players.count { it.ping >= threshold }
 
-        plugin.configManager.sendMessage(
-            sender,
+        sender.sendConfigMessage(
+            plugin,
             "avgping",
             "{target}" to targetName,
             "{players}" to players.size,
