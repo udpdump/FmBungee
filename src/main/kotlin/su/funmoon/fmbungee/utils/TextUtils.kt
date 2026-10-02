@@ -1,7 +1,6 @@
 package su.funmoon.fmbungee.utils
 
 import net.md_5.bungee.api.ChatColor
-import net.md_5.bungee.api.CommandSender
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.TextComponent
 import java.util.regex.Pattern
@@ -39,13 +38,4 @@ object TextUtils {
     }
 }
 
-fun String.colorize(): String = TextUtils.colorize(this)
-
-fun String.toComponent(): BaseComponent = TextUtils.toComponent(this)
-
-fun String.toComponents(): Array<BaseComponent> = TextUtils.format(this)
-
-fun CommandSender.sendColoredMessage(text: String) {
-    sendMessage(TextUtils.toComponent(text))
-}
 

@@ -140,15 +140,4 @@ class ConfigManager(private val plugin: FmBungee) {
     }
 }
 
-fun CommandSender.sendConfigMessage(
-    configManager: ConfigManager,
-    path: String,
-    vararg placeholders: Pair<String, Any>
-) {
-    if (placeholders.isEmpty()) {
-        configManager.sendMessage(this, path)
-    } else {
-        configManager.sendMessage(this, path, placeholders.toMap())
-    }
-}
 
